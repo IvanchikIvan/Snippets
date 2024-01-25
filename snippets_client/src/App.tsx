@@ -1,25 +1,15 @@
-import { useState } from 'react'
-import './App.css'
+import React from 'react';
+import {BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import SnippetList from './components/SnippetsList/SnippetsList';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App: React.FC = () => {
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Snippets????
-      </p>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/snippets" element={<SnippetList />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

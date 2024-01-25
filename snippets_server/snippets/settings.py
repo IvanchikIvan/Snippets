@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3$az73lfd21nhwk(zj6x1onnu5lnnalk17$oknrg6_-x1_(+uc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["http://localhost:3000",]
+ALLOWED_HOSTS = ["localhost",'127.0.0.1']
 
 
 # Application definition
@@ -54,6 +54,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'snippets.urls'
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 TEMPLATES = [
     {
