@@ -6,4 +6,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/snippets/', views.SnippetList.as_view(), name='snippet-list'),
     path('register/', views.RegisterView.as_view(), name='register'),
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('check-auth/', views.check_auth, name='check-auth'),
 ]
