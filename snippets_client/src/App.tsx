@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import SnippetList from "./components/SnippetsList/SnippetsList";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
+import { Provider } from 'react-redux';
+import store from './components/Redux/store';
 import axios from "axios";
 
 const App: React.FC = () => {
@@ -19,14 +21,16 @@ const App: React.FC = () => {
 }, []);
 
   return (
-    <Router>
-      <Routes>
-        <Route path='/' element={ <Navigate to="/snippets" /> }/>  
-        <Route path="/snippets" element={<SnippetList/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
-      </Routes>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          <Route path='/' element={ <Navigate to="/snippets" /> }/>  
+          <Route path="/snippets" element={<SnippetList/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/register" element={<Register/>} />
+        </Routes>
+      </Router>
+    </Provider>
   );
 };
 

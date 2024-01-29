@@ -1,52 +1,58 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAuthStatus } from '../Redux/actions';
+import store from '../Redux/store'
 
-interface LoginProps {}
+const Login: React.FC = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const authStatus = useSelector((state: any) => state.authStatus);
 
-const Login: React.FC<LoginProps> = () => {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-
-  const loginUser = async () => {
+  const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/login/", {
-        username,
-        password,
+      const response = await fetch('http://localhost:8000/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
       });
-      localStorage.setItem("access", response.data.access);
-      localStorage.setItem("refresh", response.data.refresh);
-      console.log("Sucsefull login")
-    } catch (err) {
-      console.error('Login error', err)
+
+      if (response.ok) {
+        console.log("OK")
+        dispatch(setAuthStatus(true));
+        console.log(authStatus)
+      } else {
+        console.error('Authentication failed');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
     }
   };
 
   return (
     <div>
-      <h2>Login</h2>
-      <form>
-        <label>
-          Username:
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <br />
-        <button type="button" onClick={loginUser}>
-          Login
-        </button>
-      </form>
+      <label>
+        Username:
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Password:
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </label>
+      <br />
+      <button onClick={handleLogin}>Login</button>
+      <p>{authStatus}</p>
     </div>
   );
 };
