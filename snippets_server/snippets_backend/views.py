@@ -1,11 +1,23 @@
 from django.http import JsonResponse
-from rest_framework.views import APIView
-from rest_framework import generics, status, permissions
-from rest_framework.decorators import api_view, permission_classes
-from .models import Snippet
-from django.contrib.auth.models import User
-from .serializers import SnippetSerializer, UserSerializer
+from django.shortcuts import render
+from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.authtoken.models import Token
+from rest_framework import generics, status, permissions
+from django.contrib.auth import get_user_model
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from .models import Snippet
+from .serializers import SnippetSerializer, UserSerializer
+
+
+def check_auth(request):
+    if request.user.is_authenticated:
+        return JsonResponse({'status': 'authenticated', 'username': request.user.username})
+    else:
+        return JsonResponse({'status': 'not_authenticated'})
+    
 
 
 class SnippetList(generics.ListCreateAPIView):
@@ -19,16 +31,20 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
 
 
-class LoginView(APIView):
+class LoginView(generics.CreateAPIView):
+    serializer_class = UserSerializer
+
     def post(self, request, *args, **kwargs):
         username = request.data.get('username')
         password = request.data.get('password')
-        return Response(status=status.HTTP_200_OK)
+        print(username, password)
+        user = authenticate(request, username=username, password=password)
+
+        if user:
+            login(request, user)
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        
 
 
-@api_view(['GET'])
-def check_auth(request):
-    if request.user.is_authenticated:
-        return JsonResponse({'authenticated': True, 'username': request.user.username})
-    else:
-        return JsonResponse({'authenticated': False})
