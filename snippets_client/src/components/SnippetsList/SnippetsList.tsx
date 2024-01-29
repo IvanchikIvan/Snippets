@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Header from "../NavBar/NavBar";
 
 interface Snippet {
   id: number;
@@ -28,6 +29,7 @@ const SnippetList: React.FC = () => {
 
   return (
     <div>
+      <Header/>
       <h1>Snippet List</h1>
       <ul>
         {snippets.map((snippet) => (
