@@ -8,6 +8,10 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const csrfToken = document.cookie.replace(
+    /(?:(?:^|.*;\s*)csrftoken\s*=\s*([^;]*).*$)|^.*$/,
+    '$1'
+  );
   const dispatch = useDispatch();
   const authStatus = useSelector((state: any) => state.authStatus);
 
@@ -18,6 +22,7 @@ const Login: React.FC = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken,
         },
         body: JSON.stringify({ username, password }),
       });
