@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logout from '../Logout/Logout';
 
 const Header: React.FC = () => {
   return (
@@ -25,28 +26,21 @@ const Header: React.FC = () => {
           <ul className="navbar-nav mr-auto">
             <li className="form-inline">
               <Link className="btn btn-outline-success" to="/add_snippet">
-                Добавить сниппет
+                Add Snippet
               </Link>
             </li>
-
-            {/* Проверка аутентификации пользователя */}
-            {true ? (
               <li className="nav-item">
                 <Link className="nav-link" to="/my_snippets">
-                  Мои сниппеты
+                  My Snippets
                 </Link>
               </li>
-            ) : null}
           </ul>
 
-          {/* Проверка аутентификации пользователя */}
           {true ? (
             <ul className="navbar-nav mr-right">
               <span className="navbar-text"></span>
               <li className="nav-item active">
-                <Link className="nav-link" to="/logout">
-                  Выйти
-                </Link>
+                <Logout />
               </li>
             </ul>
           ) : (
