@@ -26,8 +26,7 @@ class RegisterView(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = [permissions.AllowAny]
 
-
-@csrf_protect
+к
 class LoginView(APIView):
     serializer_class = UserSerializer
     def post(self, request, *args, **kwargs):
