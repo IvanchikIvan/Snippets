@@ -1,13 +1,10 @@
 from django.http import JsonResponse
-from django.shortcuts import render
-from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.authtoken.models import Token
 from rest_framework import generics, status, permissions
-from django.contrib.auth import get_user_model
-from django.contrib.auth import authenticate, login
+from rest_framework.decorators import APIView
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_protect, get_token
 from .models import Snippet
 from .serializers import SnippetSerializer, UserSerializer
 
@@ -17,7 +14,6 @@ def check_auth(request):
         return JsonResponse({'status': 'authenticated', 'username': request.user.username})
     else:
         return JsonResponse({'status': 'not_authenticated'})
-    
 
 
 class SnippetList(generics.ListCreateAPIView):
@@ -31,13 +27,14 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
 
 
-class LoginView(generics.CreateAPIView):
+@csrf_protect
+class LoginView(APIView):
     serializer_class = UserSerializer
-
     def post(self, request, *args, **kwargs):
         username = request.data.get('username')
         password = request.data.get('password')
-        print(username, password)
+        csrf_token = get_token(request)
+        data = {'csrf_token': csrf_token}
         user = authenticate(request, username=username, password=password)
 
         if user:
@@ -45,6 +42,15 @@ class LoginView(generics.CreateAPIView):
             return Response(status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-        
 
 
+class LogoutView(APIView):
+    def post(self, request, *args, **kwargs):
+        logout(request)
+        return Response({'detail': 'Successfully logged out'})
+
+
+def send_csrf_token(request):
+    csrf_token = get_token(request)
+    data = {'csrf_token': csrf_token}
+    return JsonResponse(data)
