@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuthStatus } from '../Redux/actions';
-import store from '../Redux/store'
+
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const authStatus = useSelector((state: any) => state.authStatus);
 
   const handleLogin = async () => {
     try {
+      setLoading(true);
       const response = await fetch('http://localhost:8000/login/', {
         method: 'POST',
         headers: {
@@ -20,14 +23,15 @@ const Login: React.FC = () => {
       });
 
       if (response.ok) {
-        console.log("OK")
         dispatch(setAuthStatus(true));
-        console.log(authStatus)
       } else {
-        console.error('Authentication failed');
+        const data = await response.json();
+        setError(data.error || 'Authentication failed');
       }
     } catch (error) {
-      console.error('Error during login:', error);
+      setError('Error during login');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,7 +55,10 @@ const Login: React.FC = () => {
         />
       </label>
       <br />
-      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleLogin} disabled={loading}>
+        {loading ? 'Logging in...' : 'Login'}
+      </button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <p>{authStatus}</p>
     </div>
   );
