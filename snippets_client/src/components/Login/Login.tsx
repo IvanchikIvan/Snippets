@@ -1,48 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAuthStatus, setCsrfToken } from '../Redux/actions';
-import { useNavigate } from 'react-router-dom';
+import { setAuthStatus, setCsrfToken, setUsername } from '../Redux/actions';
 import axios from 'axios';
 
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.xsrfCookieName = 'csrftoken';
 
 const Login: React.FC = () => {
-  const [username, setUsername] = useState('');
+  const [username, setUsernameField] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const authStatus = useSelector((state: any) => state.authStatus);
   const csrfToken = useSelector((state: any) => state.csrfToken);
-  const navigate = useNavigate()
 
   useEffect(() => {
-    fetch('http://localhost:8000/csrf_token/')
-      .then(response => response.json())
-      .then(data => dispatch(setCsrfToken(data.csrf_token)))
+    axios.get('http://localhost:8000/csrf_token/')
+      .then(response => dispatch(setCsrfToken(response.data.csrf_token)))
       .catch(error => console.error(error));
   }, []);
-  
+
   const handleLogin = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8000/login/', {
-        method: 'POST',
+      const response = await axios.post('http://localhost:8000/login/', {
+        username,
+        password,
+      }, {
         headers: {
           'Content-Type': 'application/json',
-          'X-CSRFToken': csrfToken
+          'X-CSRFToken': csrfToken,
         },
-        body: JSON.stringify({ username, password }),
       });
 
-      if (response.ok) {
+      if (response.status === 200) {
         dispatch(setAuthStatus(true));
-        console.log('Successful login')
-        navigate("/snippets", { replace: true });
+        dispatch(setUsername(username));
       } else {
-        const data = await response.json();
-        setError(data.error || 'Authentication failed');
+        setError(response.data.error || 'Authentication failed');
       }
     } catch (error) {
       setError('Error during login');
@@ -58,7 +54,7 @@ const Login: React.FC = () => {
         <input
           type="text"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setUsernameField(e.target.value)}
         />
       </label>
       <br />

@@ -1,11 +1,10 @@
-import { SET_AUTH_STATUS, SET_TOKEN } from './actions';
+import { SET_AUTH_STATUS, SET_NAME, SET_TOKEN } from "./actions";
 
 const initialState = {
   authStatus: false,
   csrfToken: null,
+  name: null,
 };
-
-
 
 const rootReducer = (state = initialState, action: any) => {
   switch (action.type) {
@@ -14,15 +13,19 @@ const rootReducer = (state = initialState, action: any) => {
         ...state,
         authStatus: action.payload,
       };
+    case SET_NAME:
+      return {
+        ...state,
+        name: action.payload,
+      };
     case SET_TOKEN:
-        return {
-          ...state,
-          csrfToken: action.payload,
-        };
-      default:
-        return state;
+      return {
+        ...state,
+        csrfToken: action.payload,
+      };
+    default:
+      return state;
   }
 };
-
 
 export default rootReducer;

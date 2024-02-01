@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logout from "../Logout/Logout";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import Dropdown from "react-bootstrap/Dropdown";
 import Login from "../Login/Login";
 
 const Header: React.FC = () => {
   const authStatus = useSelector((state: any) => state.authStatus);
-
+  const pFDDSFs = useSelector((state: any) => state.username);
 
   return (
     <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -41,12 +41,20 @@ const Header: React.FC = () => {
               </Link>
             </li>
           </ul>
-
-          { authStatus ? (
+          {authStatus ? (
             <ul className="navbar-nav mr-right">
               <span className="navbar-text"></span>
               <li className="nav-item active">
-                <Logout />
+                <Dropdown>
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    Welcome, {pFDDSFs}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1">
+                      <Logout />
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               </li>
             </ul>
           ) : (
@@ -56,7 +64,9 @@ const Header: React.FC = () => {
                   Login
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1"><Login /></Dropdown.Item>
+                  <Dropdown.Item href="#/action-1">
+                    <Login />
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </li>
