@@ -37,6 +37,7 @@ const Login: React.FC = () => {
       if (response.status === 200) {
         dispatch(setAuthStatus(true));
         dispatch(setUsername(username));
+        localStorage.setItem('authToken', response.data.token);
       } else {
         setError(response.data.error || 'Authentication failed');
       }

@@ -1,7 +1,7 @@
 import { SET_AUTH_STATUS, SET_NAME, SET_TOKEN } from "./actions";
 
 const initialState = {
-  authStatus: false,
+  authStatus: localStorage.getItem('authStatus') || false,
   csrfToken: null,
   name: null,
 };

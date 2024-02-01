@@ -17,6 +17,7 @@ const Logout: React.FC = () => {
 
       if (response.ok) {
         dispatch(setAuthStatus(false));
+        localStorage.setItem('authStatus', authStatus);
         console.log('Logout successful', authStatus)
       } else {
         console.error('Logout failed');
