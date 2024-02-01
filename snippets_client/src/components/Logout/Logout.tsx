@@ -4,7 +4,6 @@ import { setAuthStatus } from '../Redux/actions';
 
 const Logout: React.FC = () => {
   const dispatch = useDispatch();
-  const authStatus = useSelector((state: any) => state.authStatus);
 
   const handleLogout = async () => {
     try {
@@ -17,8 +16,7 @@ const Logout: React.FC = () => {
 
       if (response.ok) {
         dispatch(setAuthStatus(false));
-        localStorage.setItem('authStatus', authStatus);
-        console.log('Logout successful', authStatus)
+        localStorage.removeItem('authStatus');
       } else {
         console.error('Logout failed');
       }
