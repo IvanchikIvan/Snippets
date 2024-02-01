@@ -1,8 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Logout from '../Logout/Logout';
+import React from "react";
+import { Link } from "react-router-dom";
+import Logout from "../Logout/Logout";
+import { useSelector } from 'react-redux';
+import Dropdown from "react-bootstrap/Dropdown";
+import Login from "../Login/Login";
 
 const Header: React.FC = () => {
+  const authStatus = useSelector((state: any) => state.authStatus);
+
+
   return (
     <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <div className="container">
@@ -29,14 +35,14 @@ const Header: React.FC = () => {
                 Add Snippet
               </Link>
             </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/my_snippets">
-                  My Snippets
-                </Link>
-              </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/my_snippets">
+                My Snippets
+              </Link>
+            </li>
           </ul>
 
-          {true ? (
+          { authStatus ? (
             <ul className="navbar-nav mr-right">
               <span className="navbar-text"></span>
               <li className="nav-item active">
@@ -45,20 +51,14 @@ const Header: React.FC = () => {
             </ul>
           ) : (
             <li className="navbar-nav mr-right nav-item dropdown dropdown-menu-right">
-              <a
-                className="btn btn-outline-primary my-2 my-sm-0 dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Авторизация
-              </a>
-              <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                {/* Вставьте код для формы входа */}
-              </div>
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  Login
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item href="#/action-1"><Login /></Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </li>
           )}
         </div>
