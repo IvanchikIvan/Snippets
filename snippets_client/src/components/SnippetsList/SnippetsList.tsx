@@ -18,7 +18,7 @@ const SnippetList: React.FC = () => {
       try {
         const response = await axios.get("http://localhost:8000/api/snippets/");
         setSnippets(response.data);
-        console.log(snippets)
+        console.log(snippets);
       } catch (error) {
         console.error("Ошибка запроса получения сниппетов:", error);
       }
@@ -29,18 +29,29 @@ const SnippetList: React.FC = () => {
 
   return (
     <div>
-      <Header/>
+      <Header />
       <h1>Snippet List</h1>
-      <ul>
-        {snippets.map((snippet) => (
-          <li key={snippet.id}>
-            <strong>{snippet.name}</strong>
-            <p>{snippet.code}</p>
-            <p>Created on: {snippet.creation_date}</p>
-            <p>User: {snippet.user || "Anonymous"}</p>
-          </li>
-        ))}
-      </ul>
+      <div className="container mt-5">
+        <h1>Список сниппетов</h1>
+        <table className="table mt-4">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Дата создания</th>
+            </tr>
+          </thead>
+          <tbody>
+            {snippets.map((snippet) => (
+              <tr>
+                <td>{snippet.id}</td>
+                <td>{snippet.name}</td>
+                <td>{snippet.creation_date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

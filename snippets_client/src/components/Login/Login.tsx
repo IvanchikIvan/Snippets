@@ -16,7 +16,7 @@ const Login: React.FC = () => {
   const csrfToken = useSelector((state: any) => state.csrfToken);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/csrf_token/')
+    axios.get('http://localhost:8000/api/csrf_token/')
       .then(response => dispatch(setCsrfToken(response.data.csrf_token)))
       .catch(error => console.error(error));
   }, []);
@@ -24,7 +24,7 @@ const Login: React.FC = () => {
   const handleLogin = async () => {
     try {
       setLoading(true);
-      const response = await axios.post('http://localhost:8000/login/', {
+      const response = await axios.post('http://localhost:8000/api/login/', {
         username,
         password,
       }, {
