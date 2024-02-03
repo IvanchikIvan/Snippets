@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../NavBar/NavBar";
 import { Link } from "react-router-dom";
+import arrow from "../../assets/arrow-right-svgrepo-com.svg";
 
 interface Snippet {
   id: number;
@@ -48,7 +49,14 @@ const SnippetList: React.FC = () => {
                 <td>{snippet.id}</td>
                 <td>{snippet.name}</td>
                 <td>{snippet.creation_date}</td>
-                <Link to={`/snippets/${snippet.id}`}>{snippet.name}</Link>
+                <Link to={`/snippets/${snippet.id}`}>
+                  <a
+                    className="icon-link icon-link-hover"
+                    href="#"
+                  >
+                    To Snippet
+                  </a>
+                </Link>
               </tr>
             ))}
           </tbody>
