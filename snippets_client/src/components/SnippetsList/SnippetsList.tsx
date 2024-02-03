@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../NavBar/NavBar";
+import { Link } from "react-router-dom";
 
 interface Snippet {
   id: number;
@@ -47,6 +48,7 @@ const SnippetList: React.FC = () => {
                 <td>{snippet.id}</td>
                 <td>{snippet.name}</td>
                 <td>{snippet.creation_date}</td>
+                <Link to={`/snippets/${snippet.id}`}>{snippet.name}</Link>
               </tr>
             ))}
           </tbody>
