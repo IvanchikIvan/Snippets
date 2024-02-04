@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../NavBar/NavBar";
 import { useParams } from "react-router-dom";
+import { Card, Col, Container, Row } from "react-bootstrap";
 
 interface Snippet {
   id: number;
@@ -13,14 +14,16 @@ interface Snippet {
 
 const SnippetPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [snippets, setSnippets] = useState<Snippet>();
+  const [snippet, setSnippet] = useState<Snippet>();
 
   useEffect(() => {
     const fetchSnippets = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/snippets/${id}`);
-        setSnippets(response.data[0]);
-        console.log(snippets?.user);
+        const response = await axios.get(
+          `http://localhost:8000/api/snippets/${id}`
+        );
+        setSnippet(response.data[0]);
+        console.log(snippet?.user);
       } catch (error) {
         console.error("Ошибка запроса получения сниппетов:", error);
       }
@@ -30,26 +33,26 @@ const SnippetPage: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <Header />
-      <div className="row">
-        <div className="col">
-          <form>
-            <fieldset disabled>
-              <div className="form-group row">
-                <div className="col col-8">{snippets?.name}</div>
-                <div className="col col-4">{snippets?.user}</div>
-              </div>
-              <div className="form-group row">
-                <div className="col">
-                  <code className="python">{snippets?.code}</code>
-                </div>
-              </div>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    </div>
+    <>
+      <B />
+      <Container className="mt-5 ">
+        <Row>
+          <Col>
+            <Card>
+              <Card.Header>{snippet?.name}</Card.Header>
+              <Card.Body>
+                <Card.Title>{snippet?.user || "Anon"}</Card.Title>
+                <Card.Text>
+                  <pre>
+                    <code className="pythob">{snippet?.code}</code>
+                  </pre>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 
