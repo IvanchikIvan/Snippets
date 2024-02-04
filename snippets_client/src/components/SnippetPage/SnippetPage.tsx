@@ -34,7 +34,7 @@ const SnippetPage: React.FC = () => {
 
   return (
     <>
-      <B />
+      <Header />
       <Container className="mt-5 ">
         <Row>
           <Col>
