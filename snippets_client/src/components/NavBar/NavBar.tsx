@@ -4,76 +4,59 @@ import Logout from "../Logout/Logout";
 import { useSelector } from "react-redux";
 import Dropdown from "react-bootstrap/Dropdown";
 import Login from "../Login/Login";
+import { Container, Navbar, Nav } from "react-bootstrap";
 
 const Header: React.FC = () => {
   const authStatus = useSelector((state: any) => state.authStatus);
-  const pFDDSFs = useSelector((state: any) => state.username);
+  const username = useSelector((state: any) => state.username);
 
   return (
-    <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div className="container">
-        <Link className="navbar-brand" to="/snippets">
-          Your Snippets!
-        </Link>
-
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarCollapse"
-          aria-controls="navbarCollapse"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbarCollapse">
-          <ul className="navbar-nav mr-auto">
-            <li className="form-inline">
-              <Link className="btn btn-outline-success" to="/add_snippet">
-                Add Snippet
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/my_snippets">
-                My Snippets
-              </Link>
-            </li>
-          </ul>
+    <Navbar bg="dark" variant="dark">
+      <Container>
+        <Navbar.Brand>
+          <Link to="/snippets" className="text-white">
+            <strong>Your Snippets!</strong>
+          </Link>
+        </Navbar.Brand>
+        <Nav className="mr-auto">
+          <Link to="/add_snippet" className="nav-link">
+            Add Snippet
+          </Link>
+          <Link to="/my_snippets" className="nav-link">
+            My Snippets
+          </Link>
+        </Nav>
+        <Nav>
           {authStatus ? (
-            <ul className="navbar-nav mr-right">
-              <span className="navbar-text"></span>
-              <li className="nav-item active">
-                <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    Welcome, {pFDDSFs}
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">
-                      <Logout />
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </li>
-            </ul>
+            <Nav.Item>
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  Welcome, {username}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item>
+                    <Logout />
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Nav.Item>
           ) : (
-            <li className="navbar-nav mr-right nav-item dropdown dropdown-menu-right">
+            <Nav.Item>
               <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                   Login
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">
+                  <Dropdown.Item>
                     <Login />
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-            </li>
+            </Nav.Item>
           )}
-        </div>
-      </div>
-    </nav>
+        </Nav>
+      </Container>
+    </Navbar>
   );
 };
 
