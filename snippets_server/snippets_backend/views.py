@@ -20,7 +20,8 @@ class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
 
-class SnippetPage(generics.ListCreateAPIView):
+
+class SnippetPage(generics.RetrieveAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
     lookup_field = 'id'
