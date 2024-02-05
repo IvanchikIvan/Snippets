@@ -1,12 +1,12 @@
 from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework import generics, status, permissions
-from rest_framework.decorators import APIView
+from rest_framework.decorators import APIView, api_view, permission_classes
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect, get_token
 from .models import Snippet
-from .serializers import SnippetSerializer, UserSerializer
+from .serializers import SnippetSerializer, UserSerializer, CreateSnippetSerializer
 
 
 def check_auth(request):
@@ -24,6 +24,12 @@ class SnippetPage(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
     lookup_field = 'id'
+
+
+class SnippetCreate(generics.CreateAPIView):
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -57,3 +63,5 @@ def send_csrf_token(request):
     csrf_token = get_token(request)
     data = {'csrf_token': csrf_token}
     return JsonResponse(data)
+
+

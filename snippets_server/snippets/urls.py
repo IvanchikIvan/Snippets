@@ -11,4 +11,5 @@ urlpatterns = [
     path('api/check-auth/', views.check_auth, name='check_auth'),
     path('api/logout/', views.LogoutView.as_view(), name='logout'),
     path('api/csrf_token/', views.send_csrf_token, name='csrf_token'),
+    path('api/create-snippet/', views.SnippetCreate.as_view(), name='create-snippet'),
 ]
