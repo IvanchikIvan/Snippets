@@ -22,8 +22,8 @@ const SnippetPage: React.FC = () => {
         const response = await axios.get(
           `http://localhost:8000/api/snippets/${id}`
         );
-        setSnippet(response.data[0]);
-        console.log(snippet?.user);
+        setSnippet(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Ошибка запроса получения сниппетов:", error);
       }
