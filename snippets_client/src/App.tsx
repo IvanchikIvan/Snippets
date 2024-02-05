@@ -5,6 +5,7 @@ import Login from "./components/Login/Login";
 import { Provider } from 'react-redux';
 import store from './components/Redux/store';
 import SnippetPage from "./components/SnippetPage/SnippetPage";
+import CreateSnippetForm from "./components/createSnippetPage/createSnippetPage";
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/snippets/:id" element={<SnippetPage/>} />
+          <Route path="/add_snippet" element={<CreateSnippetForm />} />
         </Routes>
       </Router>
     </Provider>
