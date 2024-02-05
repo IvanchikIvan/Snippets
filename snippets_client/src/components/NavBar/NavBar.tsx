@@ -8,8 +8,8 @@ import { Container, Navbar, Nav } from "react-bootstrap";
 
 const Header: React.FC = () => {
   const authStatus = useSelector((state: any) => state.authStatus);
-  const username = useSelector((state: any) => state.username);
-
+  const username = useSelector((state: any) => state.name);
+  console.log(username)
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
