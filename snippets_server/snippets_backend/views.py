@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect, get_token
 from .models import Snippet
-from .serializers import SnippetSerializer, UserSerializer, CreateSnippetSerializer
+from .serializers import SnippetSerializer, UserSerializer
 
 
 def check_auth(request):
@@ -49,7 +49,7 @@ class LoginView(APIView):
 
         if user:
             login(request, user)
-            return Response(status=status.HTTP_200_OK)
+            return Response(status=status.HTTP_200_OK, data={'user_id':request.user.id})
         else:
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
