@@ -3,7 +3,8 @@ import { SET_AUTH_STATUS, SET_NAME, SET_TOKEN } from "./actions";
 const initialState = {
   authStatus: localStorage.getItem('authStatus') || false,
   csrfToken: null,
-  name: null,
+  name: localStorage.getItem('username') || null,
+  userID: localStorage.getItem('userID') || null,
 };
 
 const rootReducer = (state = initialState, action: any) => {
