@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAuthStatus, setCsrfToken, setUsername } from '../Redux/actions';
+import { setAuthStatus, setCsrfToken, setUsername, setUserID } from '../Redux/actions';
 import axios from 'axios';
 
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -37,7 +37,11 @@ const Login: React.FC = () => {
       if (response.status === 200) {
         dispatch(setAuthStatus(true));
         dispatch(setUsername(username));
-        localStorage.setItem('authToken', response.data.token);
+        dispatch(setUserID(response.data['user_id']))
+        localStorage.setItem('username', username);
+        localStorage.setItem('userID', response.data['user_id']);
+        localStorage.setItem('authStatus', response.data.token);
+
       } else {
         setError(response.data.error || 'Authentication failed');
       }
