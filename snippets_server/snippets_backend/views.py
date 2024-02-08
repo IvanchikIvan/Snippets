@@ -1,5 +1,7 @@
 from django.http import JsonResponse
 from rest_framework.response import Response
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
 from rest_framework import generics, status, permissions
 from rest_framework.decorators import APIView, api_view, permission_classes
 from django.contrib.auth import authenticate, login, logout
@@ -48,19 +50,13 @@ class RegisterView(generics.CreateAPIView):
 
 
 class LoginView(APIView):
-    serializer_class = UserSerializer
     def post(self, request, *args, **kwargs):
-        username = request.data.get('username')
-        password = request.data.get('password')
-        csrf_token = get_token(request)
-        data = {'csrf_token': csrf_token}
-        user = authenticate(request, username=username, password=password)
-
-        if user:
-            login(request, user)
-            return Response(status=status.HTTP_200_OK, data={'user_id':request.user.id})
-        else:
-            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        serializer = ObtainAuthToken().serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        print(token)
+        return Response({'token': token.key, 'user_id': user.pk})
 
 
 class LogoutView(APIView):
