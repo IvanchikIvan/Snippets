@@ -27,6 +27,15 @@ class SnippetPage(generics.RetrieveAPIView):
     lookup_field = 'id'
 
 
+class UserSnippetList(generics.ListAPIView):
+    serializer_class = SnippetSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    def get_queryset(self):
+        user = self.request.user
+        print(self.request.user)
+        return Snippet.objects.filter(user=user)
+
+
 class SnippetCreate(generics.CreateAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
