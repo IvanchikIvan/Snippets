@@ -21,7 +21,7 @@ const Header: React.FC = () => {
           <Link to="/add_snippet" className="nav-link">
             Add Snippet
           </Link>
-          <Link to="/my_snippets" className="nav-link">
+          <Link to="/snippets/my-snippets" className="nav-link">
             My Snippets
           </Link>
         </Nav>
