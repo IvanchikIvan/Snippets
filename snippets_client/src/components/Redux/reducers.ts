@@ -1,10 +1,10 @@
-import { SET_AUTH_STATUS, SET_NAME, SET_TOKEN } from "./actions";
+import { SET_AUTH_STATUS, SET_NAME, SET_CSRF_TOKEN } from "./actions";
 
 const initialState = {
-  authStatus: localStorage.getItem('authStatus') || false,
+  authStatus: localStorage.getItem("authStatus") || false,
   csrfToken: null,
-  name: localStorage.getItem('username') || null,
-  userID: localStorage.getItem('userID') || null,
+  name: localStorage.getItem("username") || null,
+  userID: localStorage.getItem("userID") || null,
 };
 
 const rootReducer = (state = initialState, action: any) => {
@@ -19,7 +19,7 @@ const rootReducer = (state = initialState, action: any) => {
         ...state,
         name: action.payload,
       };
-    case SET_TOKEN:
+    case SET_CSRF_TOKEN:
       return {
         ...state,
         csrfToken: action.payload,

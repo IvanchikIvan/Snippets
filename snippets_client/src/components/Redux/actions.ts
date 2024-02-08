@@ -1,5 +1,5 @@
 export const SET_AUTH_STATUS = 'SET_AUTH_STATUS';
-export const SET_TOKEN = 'SET_TOKEN';
+export const SET_CSRF_TOKEN = 'SET_CSRF_TOKEN';
 export const SET_NAME = 'SET_NAME';
 export const SET_USERID = 'SET_USERID';
 
@@ -9,7 +9,7 @@ export const setAuthStatus = (status: boolean) => ({
 });
 
 export const setCsrfToken = (token: string) => ({
-  type: SET_TOKEN,
+  type: SET_CSRF_TOKEN,
   payload: token,
 });
 
