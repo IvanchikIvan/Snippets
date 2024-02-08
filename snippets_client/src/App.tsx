@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from './components/Redux/store';
 import SnippetPage from "./components/SnippetPage/SnippetPage";
 import CreateSnippetForm from "./components/createSnippetPage/createSnippetPage";
+import MySnippetsPage from "./components/MySnippetsPage/MySnippetsPage";
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path='/' element={ <Navigate to="/snippets" /> }/>  
           <Route path="/snippets" element={<SnippetList/>} />
+          <Route path="/snippets/my-snippets" element={<MySnippetsPage/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/snippets/:id" element={<SnippetPage/>} />

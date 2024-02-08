@@ -35,6 +35,7 @@ const Login: React.FC = () => {
       });
 
       if (response.status === 200) {
+        
         dispatch(setAuthStatus(true));
         dispatch(setUsername(username));
         dispatch(setUserID(response.data['user_id']))
