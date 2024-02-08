@@ -10,6 +10,7 @@ interface Snippet {
   code: string;
   creation_date: string;
   user: string | null;
+  user_name: string | null;
 }
 
 const SnippetPage: React.FC = () => {
@@ -23,7 +24,6 @@ const SnippetPage: React.FC = () => {
           `http://localhost:8000/api/snippets/${id}`
         );
         setSnippet(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error("Ошибка запроса получения сниппетов:", error);
       }
@@ -31,7 +31,6 @@ const SnippetPage: React.FC = () => {
 
     fetchSnippets();
   }, []);
-
   return (
     <>
       <Header />

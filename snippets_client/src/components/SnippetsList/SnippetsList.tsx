@@ -20,7 +20,6 @@ const SnippetList: React.FC = () => {
       try {
         const response = await axios.get("http://localhost:8000/api/snippets/");
         setSnippets(response.data);
-        console.log(snippets);
       } catch (error) {
         console.error("Ошибка запроса получения сниппетов:", error);
       }
