@@ -1,69 +1,24 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 module.exports = {
-  mode: "development",
-  entry: "./src/index.js",
+  entry: './src/main.tsx',
   output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
   },
-  stats: {
-    children: true,
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js', '.jsx']
   },
-  devServer: {
-    static: path.resolve(__dirname, "dist"),
-    port: 5000,
-    hot: true,
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
-      filename: "index.html",
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: 'public/favicon.ico',
-          to: 'favicon.ico' 
-        }
-      ]
-    })
-  ],
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
-          },
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        options: {
+          configFile: 'tsconfig.node.json',
         },
-      },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.(png|jpg|jpeg|gif|svg)$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-              outputPath: "Assets/",
-            },
-          },
-        ],
-      },
-    ],
-  },
-  resolve: {
-    extensions: [".ts",".tsx",".jsx",".js"],
-  },
+        exclude: /node_modules/
+      }
+    ]
+  }
 };
