@@ -7,6 +7,8 @@ import store from './components/Redux/store';
 import SnippetPage from "./components/SnippetPage/SnippetPage";
 import CreateSnippetForm from "./components/createSnippetPage/createSnippetPage";
 import MySnippetsPage from "./components/MySnippetsPage/MySnippetsPage";
+import React from "react";
+
 
 const App: React.FC = () => {
   return (
