@@ -24,7 +24,7 @@ const SnippetPage: React.FC = () => {
           `http://localhost:8000/api/snippets/${id}`
         );
         setSnippet(response.data);
-        console.log(response.data)
+        console.log(response.data);
       } catch (error) {
         console.error("Ошибка запроса получения сниппетов:", error);
       }
@@ -43,9 +43,16 @@ const SnippetPage: React.FC = () => {
               <Card.Body>
                 <Card.Title>{snippet?.user_name || "Anon"}</Card.Title>
                 <Card.Text>
-                  <pre>
-                    <code className="pythob">{snippet?.code}</code>
-                  </pre>
+                  {snippet &&
+                    React.createElement(
+                      "pre",
+                      null,
+                      React.createElement(
+                        "code",
+                        { className: "pythob" },
+                        snippet.code
+                      )
+                    )}
                 </Card.Text>
               </Card.Body>
             </Card>

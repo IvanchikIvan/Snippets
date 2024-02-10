@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../NavBar/NavBar";
 import { Link } from "react-router-dom";
-import arrow from "../../assets/arrow-right-svgrepo-com.svg";
 
 interface Snippet {
   id: number;
