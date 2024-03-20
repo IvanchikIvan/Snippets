@@ -33,9 +33,7 @@ const Header: React.FC = () => {
                   Welcome, {username}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item>
                     <Logout />
-                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Nav.Item>
@@ -46,9 +44,7 @@ const Header: React.FC = () => {
                   Login
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item>
                     <Login />
-                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Nav.Item>
