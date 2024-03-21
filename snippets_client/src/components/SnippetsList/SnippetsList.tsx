@@ -13,19 +13,26 @@ interface Snippet {
 
 const SnippetList: React.FC = () => {
   const [snippets, setSnippets] = useState<Snippet[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchSnippets = async () => {
+    const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:8000/api/snippets/");
         setSnippets(response.data);
       } catch (error) {
         console.error("Ошибка запроса получения сниппетов:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchSnippets();
+    fetchData();
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -43,18 +50,13 @@ const SnippetList: React.FC = () => {
           </thead>
           <tbody>
             {snippets.map((snippet) => (
-              <tr>
+              <tr key={snippet.id}>
                 <td>{snippet.id}</td>
                 <td>{snippet.name}</td>
                 <td>{snippet.creation_date}</td>
-                <Link to={`/snippets/${snippet.id}`}>
-                  <a
-                    className="icon-link icon-link-hover"
-                    href="#"
-                  >
-                    To Snippet
-                  </a>
-                </Link>
+                <td>
+                  <Link to={`/snippets/${snippet.id}`}>To Snippet</Link>
+                </td>
               </tr>
             ))}
           </tbody>
