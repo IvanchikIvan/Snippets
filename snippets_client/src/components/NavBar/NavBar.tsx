@@ -1,57 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logout from "../Logout/Logout";
 import { useSelector } from "react-redux";
-import Dropdown from "react-bootstrap/Dropdown";
+import styles from "./NavBar.module.css";
 import Login from "../Login/Login";
-import { Container, Navbar, Nav } from "react-bootstrap";
 
 const Header: React.FC = () => {
+  const [isLoginOpen, setLoginOpen] = useState(false);
+  const [isLogoutOpen, setLogoutOpen] = useState(false);
   const authStatus = useSelector((state: any) => state.authStatus);
   const username = useSelector((state: any) => state.name);
+
+  const toggleLogin = () => {
+    setLoginOpen(!isLoginOpen);
+  };
+
+  const toggleLogout = () => {
+    setLogoutOpen(!isLogoutOpen);
+  };
+
   return (
-    <Navbar bg="dark" variant="dark">
-      <Container>
-        <Navbar.Brand>
-          <Link to="/snippets" className="text-white">
-            <strong>Your Snippets!</strong>
-          </Link>
-        </Navbar.Brand>
-        <Nav className="mr-auto">
-          <Link to="/add_snippet" className="nav-link">
+    <header className={styles.header}>
+      <div className={styles.container}>
+        <Link to="/snippets" className={styles.brand}>
+          <strong>Your Snippets!</strong>
+        </Link>
+        <nav className={styles.navRight}>
+          <Link to="/add_snippet" className={styles.navLink}>
             Add Snippet
           </Link>
-          <Link to="/snippets/my-snippets" className="nav-link">
+          <Link to="/snippets/my-snippets" className={styles.navLink}>
             My Snippets
           </Link>
-        </Nav>
-        <Nav>
           {authStatus ? (
-            <Nav.Item>
-              <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  Welcome, {username}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                    <Logout />
-                </Dropdown.Menu>
-              </Dropdown>
-            </Nav.Item>
+            <div className={styles.navLink}>
+              <button className={styles.dropdownToggle} onClick={toggleLogout}>
+                Welcome, {username}
+              </button>
+              {isLogoutOpen && <Logout />}
+            </div>
           ) : (
-            <Nav.Item>
-              <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  Login
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                    <Login />
-                </Dropdown.Menu>
-              </Dropdown>
-            </Nav.Item>
+            <div className={styles.navLink}>
+              <button className={styles.dropdownToggle} onClick={toggleLogin}>
+                Login
+              </button>
+              {isLoginOpen && <Login />}
+            </div>
           )}
-        </Nav>
-      </Container>
-    </Navbar>
+        </nav>
+      </div>
+    </header>
   );
 };
 
