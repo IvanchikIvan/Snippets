@@ -18,20 +18,19 @@ const MySnippetsPage: React.FC = () => {
 
   useEffect(() => {
     const fetchSnippets = async () => {
-        try {
-            const response = await axios.get("http://localhost:8000/api/snippets/my-snippets", {
-              headers: {
-                Authorization: `Token ${authToken}`,
-              },
-            });
-            setSnippets(response.data);
-            
-          } catch (error) {
-            console.error("Ошибка запроса получения сниппетов:", error);
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/api/snippets/my-snippets",
+          {
+            headers: {
+              Authorization: `Token ${authToken}`,
+            },
           }
-          finally {
-            console.log(authToken)
-          }
+        );
+        setSnippets(response.data);
+      } catch (error) {
+        console.error("Ошибка запроса получения сниппетов:", error);
+      }
     };
 
     fetchSnippets();
@@ -40,35 +39,34 @@ const MySnippetsPage: React.FC = () => {
   return (
     <div>
       <Header />
-      <h1>Snippet List</h1>
       <div className="container mt-5">
-        <h1>Список сниппетов</h1>
-        <table className="table mt-4">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Дата создания</th>
-            </tr>
-          </thead>
-          <tbody>
-            {snippets.map((snippet) => (
+        <h1 className="mb-4">Список сниппетов</h1>
+        <div className="table-responsive">
+          <table className="table">
+            <thead>
               <tr>
-                <td>{snippet.id}</td>
-                <td>{snippet.name}</td>
-                <td>{snippet.creation_date}</td>
-                <Link to={`/snippets/${snippet.id}`}>
-                  <a
-                    className="icon-link icon-link-hover"
-                    href="#"
-                  >
-                    To Snippet
-                  </a>
-                </Link>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Дата создания</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {snippets.map((snippet) => (
+                <tr key={snippet.id}>
+                  <td>{snippet.id}</td>
+                  <td>{snippet.name}</td>
+                  <td>{snippet.creation_date}</td>
+                  <td>
+                    <Link to={`/snippets/${snippet.id}`}>
+                      <button className="btn btn-primary">To Snippet</button>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
