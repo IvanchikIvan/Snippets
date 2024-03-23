@@ -1,9 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAuthStatus } from "../Redux/actions";
+import styles from '../Logout/Logout.module.css'
 
 const Logout: React.FC<{ isOpen: boolean; }> = ({isOpen}) => {
   const dispatch = useDispatch();
+  const csrfToken = useSelector((state: any) => state.csrfToken);
 
   const handleLogout = async () => {
     try {
@@ -11,6 +13,7 @@ const Logout: React.FC<{ isOpen: boolean; }> = ({isOpen}) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
         },
       });
 
@@ -30,8 +33,10 @@ const Logout: React.FC<{ isOpen: boolean; }> = ({isOpen}) => {
       {!isOpen ? (
         <></>
       ) : (
-        <div className="nav-link">
-          <button onClick={handleLogout}>Logout</button>
+        <div className={styles.container}>
+          <button onClick={handleLogout} >
+            <p>Logout</p>
+          </button>
         </div>
       )}
     </>

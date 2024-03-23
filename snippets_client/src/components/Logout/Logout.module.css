@@ -1,0 +1,40 @@
+.container {
+  flex-direction: column;
+  position: absolute;
+  display: flex;
+  background-color: #2e2e2e;
+  padding: 10px;
+  top: 150%;
+  width: 140px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+}
+
+.container button {
+  width: 100%;
+  padding: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.container button:hover {
+  background-color: #0056b3;
+}
+
+.container p {
+  margin-top: 10px;
+}
+
+.container p.error {
+  color: red;
+}
