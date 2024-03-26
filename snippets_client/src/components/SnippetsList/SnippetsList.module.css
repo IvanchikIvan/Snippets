@@ -25,6 +25,7 @@
 
 .snippetTable td {
   padding: 8px;
+  font-size: calc(10px + 6 * (100vw / 1280));
   border-bottom: 1px solid #ddd;
   text-align: center;
 }
@@ -36,8 +37,11 @@
 .snippetLink {
   color: blue;
   text-decoration: none;
+  font-size: calc(10px + 6 * (100vw / 1280));
 }
 
 .snippetLink:hover {
   text-decoration: underline;
 }
+
+
