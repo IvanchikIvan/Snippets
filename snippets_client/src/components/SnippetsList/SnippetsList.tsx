@@ -38,9 +38,8 @@ const SnippetList: React.FC = () => {
   return (
     <div>
       <Header />
-      <h1>Snippet List</h1>
       <div className={styles.snippetListContainer}>
-        <h1>Список сниппетов</h1>
+        <h1 className={styles.pageTitle}>Snippets List</h1>
         <table className={styles.snippetTable}>
           <thead>
             <tr>

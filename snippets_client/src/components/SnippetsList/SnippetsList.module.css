@@ -1,3 +1,12 @@
+.pageTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+  text-transform: uppercase;
+}
+
 .snippetListContainer {
   margin-top: 20px;
   text-align: center;
