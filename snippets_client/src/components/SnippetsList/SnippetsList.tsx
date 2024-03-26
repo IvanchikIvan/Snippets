@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../NavBar/NavBar";
 import { Link } from "react-router-dom";
+import styles from "./SnippetsList.module.css"; 
 
 interface Snippet {
   id: number;
@@ -38,14 +39,15 @@ const SnippetList: React.FC = () => {
     <div>
       <Header />
       <h1>Snippet List</h1>
-      <div className="container mt-5">
+      <div className={styles.snippetListContainer}>
         <h1>Список сниппетов</h1>
-        <table className="table mt-4">
+        <table className={styles.snippetTable}>
           <thead>
             <tr>
               <th>ID</th>
               <th>Name</th>
               <th>Дата создания</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -55,7 +57,9 @@ const SnippetList: React.FC = () => {
                 <td>{snippet.name}</td>
                 <td>{snippet.creation_date}</td>
                 <td>
-                  <Link to={`/snippets/${snippet.id}`}>To Snippet</Link>
+                  <Link to={`/snippets/${snippet.id}`} className={styles.snippetLink}>
+                    To Snippet
+                  </Link>
                 </td>
               </tr>
             ))}
