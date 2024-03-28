@@ -8,10 +8,20 @@
 }
 
 .snippetListContainer {
-  text-align: center;
+  display: flex;
+  flex-direction: row; 
+  height: 100vh; 
+  width: 100%; 
+}
+
+.snippetContent {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
 }
 
 .snippetTable {
+  flex: 1;
   width: 100%;
   border-collapse: collapse;
 }
@@ -42,5 +52,3 @@
 .snippetLink:hover {
   text-decoration: underline;
 }
-
-

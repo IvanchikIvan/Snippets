@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../NavBar/NavBar";
 import { Link } from "react-router-dom";
-import styles from "./SnippetsList.module.css"; 
+import styles from "./SnippetsList.module.css";
 
 interface Snippet {
   id: number;
@@ -36,34 +36,39 @@ const SnippetList: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className={styles.snippetListContainer}>
       <Header />
-      <div className={styles.snippetListContainer}>
+      <div className={styles.snippetContent}>
         <h1 className={styles.pageTitle}>Snippets List</h1>
-        <table className={styles.snippetTable}>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Дата создания</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {snippets.map((snippet) => (
-              <tr key={snippet.id}>
-                <td>{snippet.id}</td>
-                <td>{snippet.name}</td>
-                <td>{snippet.creation_date}</td>
-                <td>
-                  <Link to={`/snippets/${snippet.id}`} className={styles.snippetLink}>
-                    To Snippet
-                  </Link>
-                </td>
+        <div className={styles.snippetTableContainer}>
+          <table className={styles.snippetTable}>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Дата создания</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {snippets.map((snippet) => (
+                <tr key={snippet.id}>
+                  <td>{snippet.id}</td>
+                  <td>{snippet.name}</td>
+                  <td>{snippet.creation_date}</td>
+                  <td>
+                    <Link
+                      to={`/snippets/${snippet.id}`}
+                      className={styles.snippetLink}
+                    >
+                      To Snippet
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
