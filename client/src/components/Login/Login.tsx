@@ -7,7 +7,7 @@ import {
   setUserID,
 } from "../Redux/actions";
 import axios from "axios";
-import styles from "./Login.module.css";
+import "./Login.css";
 
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -67,7 +67,7 @@ const Login: React.FC<{ isOpen: boolean; }> = ({isOpen}) => {
       {!isOpen ? (
         <></>
       ) : (
-        <div className={styles.container}>
+        <div className='container'>
           <label>
             <input
               type="text"
