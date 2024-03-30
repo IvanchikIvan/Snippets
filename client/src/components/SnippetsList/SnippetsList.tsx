@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "../NavBar/NavBar";
+import Header from "../Sidebar/Sidebar";
 import { Link } from "react-router-dom";
-import styles from "./SnippetsList.module.css";
+import "./SnippetsList.css";
 
 interface Snippet {
   id: number;
@@ -36,12 +36,12 @@ const SnippetList: React.FC = () => {
   }
 
   return (
-    <div className={styles.snippetListContainer}>
+    <div className="snippetListContainer">
       <Header />
-      <div className={styles.snippetContent}>
-        <h1 className={styles.pageTitle}>Snippets List</h1>
-        <div className={styles.snippetTableContainer}>
-          <table className={styles.snippetTable}>
+      <div className="snippetContent">
+        <h1 className="pageTitle">Snippets List</h1>
+        <div className="snippetTableContainer">
+          <table className="snippetTable">
             <thead>
               <tr>
                 <th>ID</th>
@@ -59,7 +59,7 @@ const SnippetList: React.FC = () => {
                   <td>
                     <Link
                       to={`/snippets/${snippet.id}`}
-                      className={styles.snippetLink}
+                      className="snippetLink"
                     >
                       To Snippet
                     </Link>

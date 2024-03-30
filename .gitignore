@@ -1,16 +1,16 @@
 # Logs
-snippets_client/logs
-snippets_client/*.log
-snippets_client/npm-debug.log*
-snippets_client/yarn-debug.log*
-snippets_client/yarn-error.log*
-snippets_client/pnpm-debug.log*
-snippets_client/lerna-debug.log*
+client/logs
+client/*.log
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+client/pnpm-debug.log*
+client/lerna-debug.log*
 
-snippets_client/node_modules
-snippets_client/dist
-snippets_client/dist-ssr
-snippets_client/*.local
+client/node_modules
+client/dist
+client/dist-ssr
+client/*.local
 
 # Editor directories and files
 .vscode/*
@@ -160,5 +160,5 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
-snippets_client/package-lock.json
-snippets_client/package.json
+client/package-lock.json
+client/package.json

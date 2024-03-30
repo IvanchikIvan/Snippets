@@ -2,7 +2,7 @@ import { useState } from "react";
 import moment from "moment";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import Header from "../NavBar/NavBar";
+import Header from "../Sidebar/Sidebar";
 
 const CreateSnippetForm = () => {
   const [name, setName] = useState("");
