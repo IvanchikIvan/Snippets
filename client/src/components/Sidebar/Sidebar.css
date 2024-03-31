@@ -1,13 +1,9 @@
 .sidebar {
-  width: 60px;
+  width: max-content;
   height: 100%;
   background-color: #333;
   transition: width 0.5s ease;
   overflow: hidden;
-}
-
-.sidebar.expanded {
-  width: 200px;
 }
 
 .sidebar-item {
@@ -24,14 +20,9 @@
 
 .title {
   display: none;
-  transition: opacity 0.3s ease;
-}
-
-.sidebar-item:hover .title {
-  display: inline;
-  opacity: 1;
+  transition: all 0.3s ease;
 }
 
 .sidebar.expanded .title {
-  display: inline;
+  display: block;
 }

@@ -1,5 +1,3 @@
-// SidebarItem.tsx
-
 import React from "react";
 
 interface SidebarItemProps {

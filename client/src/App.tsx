@@ -4,7 +4,7 @@ import Register from "./components/Register/Register";
 import { Provider } from 'react-redux';
 import store from './components/Redux/store';
 import SnippetPage from "./components/SnippetPage/SnippetPage";
-import CreateSnippetForm from "./components/createSnippetPage/createSnippetPage";
+import CreateSnippetForm from "./components/createSnippetPage/CreateSnippetPage";
 import MySnippetsPage from "./components/MySnippetsPage/MySnippetsPage";
 import React from "react";
 

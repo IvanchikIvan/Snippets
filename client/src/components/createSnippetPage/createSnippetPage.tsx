@@ -2,7 +2,8 @@ import { useState } from "react";
 import moment from "moment";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import Header from "../Sidebar/Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
+import "./CreateSnippetPage.css";
 
 const CreateSnippetForm = () => {
   const [name, setName] = useState("");
@@ -22,7 +23,7 @@ const CreateSnippetForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/snippets/",
+        "http://localhost:8000/api/create-snippet/",
         snippetData
       );
       console.log("Snippet created:", response.data);
@@ -32,39 +33,37 @@ const CreateSnippetForm = () => {
   };
 
   return (
-    <>
-      <Header />
-      <div className="container mt-5">
+    <div className="page-container"> {/* Применяем класс для общего контейнера */}
+      <Sidebar />
+      <div className="form-container"> {/* Применяем класс для контейнера с формой */}
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="name" className="form-label">
+          <div>
+            <label htmlFor="name">
               Name:
             </label>
             <input
               type="text"
-              className="form-control"
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <div className="mb-3">
-            <label htmlFor="code" className="form-label">
+          <div>
+            <label htmlFor="code">
               Code:
             </label>
             <textarea
-              className="form-control"
               id="code"
               value={code}
               onChange={(e) => setCode(e.target.value)}
             />
           </div>
-          <button type="submit" className="btn btn-success">
+          <button type="submit">
             Create Snippet
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

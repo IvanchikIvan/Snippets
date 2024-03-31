@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "../Sidebar/Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 import { Link } from "react-router-dom";
 import "./SnippetsList.css";
 
@@ -37,7 +37,7 @@ const SnippetList: React.FC = () => {
 
   return (
     <div className="snippetListContainer">
-      <Header />
+      <Sidebar />
       <div className="snippetContent">
         <h1 className="pageTitle">Snippets List</h1>
         <div className="snippetTableContainer">
