@@ -12,12 +12,12 @@ const Sidebar: React.FC = () => {
 
   return (
     <div className={`sidebar ${isExpanded ? 'expanded' : ''}`} onMouseEnter={toggleSidebar} onMouseLeave={toggleSidebar}>
-      <SidebarItem icon={<FaHome />} title="Home" isExpanded={isExpanded} />
-      <SidebarItem icon={<FaUsers />} title="Users" isExpanded={isExpanded} />
-      <SidebarItem icon={<FaCog />} title="Settings" isExpanded={isExpanded} />
-      <SidebarItem icon={<FaSignInAlt />} title="Login" isExpanded={isExpanded} />
-      <SidebarItem icon={<FaPlus />} title="Add" isExpanded={isExpanded} />
-      <SidebarItem icon={<FaList />} title="List" isExpanded={isExpanded} />
+      <SidebarItem icon={<FaHome />} title="Home" isExpanded={isExpanded} href='/'/>
+      <SidebarItem icon={<FaUsers />} title="Users" isExpanded={isExpanded} href='/'/>
+      <SidebarItem icon={<FaCog />} title="Settings" isExpanded={isExpanded} href='/'/>
+      <SidebarItem icon={<FaSignInAlt />} title="Login" isExpanded={isExpanded} href='/'/>
+      <SidebarItem icon={<FaPlus />} title="Add" isExpanded={isExpanded} href='/add_snippet/'/>
+      <SidebarItem icon={<FaList />} title="List" isExpanded={isExpanded} href='/'/>
     </div>
   );
 };
