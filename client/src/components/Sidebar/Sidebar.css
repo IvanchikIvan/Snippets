@@ -18,11 +18,3 @@
   margin-right: 10px;
 }
 
-.title {
-  display: none;
-  transition: all 0.3s ease;
-}
-
-.sidebar.expanded .title {
-  display: block;
-}
