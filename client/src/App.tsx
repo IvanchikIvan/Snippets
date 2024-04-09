@@ -7,6 +7,7 @@ import SnippetPage from "./components/SnippetPage/SnippetPage";
 import CreateSnippetForm from "./components/createSnippetPage/CreateSnippetPage";
 import MySnippetsPage from "./components/MySnippetsPage/MySnippetsPage";
 import React from "react";
+import Login from "./components/Login/Login";
 
 
 const App: React.FC = () => {
@@ -19,6 +20,7 @@ const App: React.FC = () => {
           <Route path="/register" element={<Register/>} />
           <Route path="/snippets/:id" element={<SnippetPage/>} />
           <Route path="/add_snippet" element={<CreateSnippetForm />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
     </Provider>
