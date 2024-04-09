@@ -12,7 +12,7 @@ import "./Login.css";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
 
-const Login: React.FC<{ isOpen: boolean; }> = ({isOpen}) => {
+const Login: React.FC = () => {
   const [username, setUsernameField] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -63,35 +63,29 @@ const Login: React.FC<{ isOpen: boolean; }> = ({isOpen}) => {
   };
 
   return (
-    <>
-      {!isOpen ? (
-        <></>
-      ) : (
-        <div className='container'>
-          <label>
-            <input
-              type="text"
-              placeholder="Login"
-              value={username}
-              onChange={(e) => setUsernameField(e.target.value)}
-            />
-          </label>
-          <label>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-          <button onClick={handleLogin} disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
-          </button>
-          {error && <p style={{ color: "red" }}>{error}</p>}
-          <p>{authStatus}</p>
-        </div>
-      )}
-    </>
+    <div className="container">
+      <label>
+        <input
+          type="text"
+          placeholder="Login"
+          value={username}
+          onChange={(e) => setUsernameField(e.target.value)}
+        />
+      </label>
+      <label>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </label>
+      <button onClick={handleLogin} disabled={loading}>
+        {loading ? "Logging in..." : "Login"}
+      </button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <p>{authStatus}</p>
+    </div>
   );
 };
 
