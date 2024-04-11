@@ -63,29 +63,31 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="container">
-      <label>
-        <input
-          type="text"
-          placeholder="Login"
-          value={username}
-          onChange={(e) => setUsernameField(e.target.value)}
-        />
-      </label>
-      <label>
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
-      <button onClick={handleLogin} disabled={loading}>
-        {loading ? "Logging in..." : "Login"}
-      </button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <p>{authStatus}</p>
-    </div>
+    <section className="login">
+      <div className="container">
+        <label>
+          <input
+            type="text"
+            placeholder="Login"
+            value={username}
+            onChange={(e) => setUsernameField(e.target.value)}
+          />
+        </label>
+        <label>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <button onClick={handleLogin} disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
+        </button>
+        {error && <p className="error">{error}</p>}
+        <p>{authStatus}</p>
+      </div>
+    </section>
   );
 };
 
