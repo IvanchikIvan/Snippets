@@ -20,7 +20,6 @@ const Login: React.FC = () => {
   const dispatch = useDispatch();
   const authStatus = useSelector((state: any) => state.authStatus);
   const csrfToken = useSelector((state: any) => state.csrfToken);
-
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/csrf_token/")
@@ -60,6 +59,7 @@ const Login: React.FC = () => {
     } finally {
       setLoading(false);
     }
+    console.log(authStatus)
   };
 
   return (
@@ -85,7 +85,6 @@ const Login: React.FC = () => {
           {loading ? "Logging in..." : "Login"}
         </button>
         {error && <p className="error">{error}</p>}
-        <p>{authStatus}</p>
       </div>
     </section>
   );
