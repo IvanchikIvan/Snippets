@@ -51,6 +51,7 @@ const Login: React.FC = () => {
         localStorage.setItem("username", username);
         localStorage.setItem("userID", response.data["user_id"]);
         localStorage.setItem("authStatus", response.data.token);
+        window.location.href = '/'
       } else {
         setError(response.data.error || "Authentication failed");
       }
